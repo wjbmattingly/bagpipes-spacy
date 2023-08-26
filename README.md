@@ -53,7 +53,7 @@ nlp = spacy.blank('en')
 # Integrate the components into the pipeline
 nlp.add_pipe('quote_detector')
 nlp.add_pipe('phrases_extractor')
-nlp.add_pipe('normalizer')
+nlp.add_pipe('normalizer', first=True)
 nlp.add_pipe('triple_detector')
 nlp.add_pipe('entity_similarity')
 ```
