@@ -20,12 +20,19 @@ Bagpipes spaCy is a collection of custom spaCy pipeline components designed to e
 9. **Keyword Extractor**: Extracts keywords from the text based on cosine similarity with the entire text or sentence.
 
 ## Table of Contents
-
 - [Bagpipes spaCy](#bagpipes-spacy)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
   - [Usage](#usage)
-    - [Integrating the Components into your spaCy Pipeline](#integrating-the-components-into-your-spacy-pipeline)
+    - [Integrating the Quote Detector](#integrating-the-quote-detector)
+    - [Integrating the Phrases Extractor](#integrating-the-phrases-extractor)
+    - [Integrating the Normalizer](#integrating-the-normalizer)
+    - [Integrating the Triple Detector](#integrating-the-triple-detector)
+    - [Integrating the Entity Similarity](#integrating-the-entity-similarity)
+    - [Integrating the Entity Cluster](#integrating-the-entity-cluster)
+    - [Integrating the Sentence Cluster](#integrating-the-sentence-cluster)
+    - [Integrating the Token Cluster](#integrating-the-token-cluster)
+    - [Integrating the Keyword Extractor](#integrating-the-keyword-extractor)
 
 ## Installation
 
@@ -33,30 +40,109 @@ To install Bagpipes spaCy, execute:
 
 ```sh
 pip install bagpipes-spacy
-
 ```
 
 ## Usage
 
-### Integrating the Components into your spaCy Pipeline
+### Integrating the Quote Detector
 
-Begin by importing the components and then integrating them into your spaCy pipeline:
+Import the `QuoteDetector` and integrate it into your spaCy pipeline:
 
 ```python
 import spacy
-from bagpipes_spacy import QuoteDetector, PhrasesExtractor, Normalizer, TripleDetector, EntitySimilarity, EntityCluster, SentenceCluster, TokenCluster, KeywordExtractor
+from bagpipes_spacy import QuoteDetector
 
 # Initialize your preferred spaCy model
-nlp = spacy.blank('en')
+nlp = spacy.load('en_core_web_md')
 
-# Integrate the components into the pipeline
+# Integrate the component into the pipeline
 nlp.add_pipe('quote_detector')
+```
+
+### Integrating the Phrases Extractor
+
+Import the `PhrasesExtractor` and integrate it into your spaCy pipeline:
+
+```python
+from bagpipes_spacy import PhrasesExtractor
+
+# Integrate the component into the pipeline
 nlp.add_pipe('phrases_extractor')
+```
+
+### Integrating the Normalizer
+
+Import the `Normalizer` and integrate it into your spaCy pipeline:
+
+```python
+from bagpipes_spacy import Normalizer
+
+# Integrate the component into the pipeline
 nlp.add_pipe('normalizer', first=True)
+```
+
+### Integrating the Triple Detector
+
+Import the `TripleDetector` and integrate it into your spaCy pipeline:
+
+```python
+from bagpipes_spacy import TripleDetector
+
+# Integrate the component into the pipeline
 nlp.add_pipe('triple_detector')
+```
+
+### Integrating the Entity Similarity
+
+Import the `EntitySimilarity` and integrate it into your spaCy pipeline:
+
+```python
+from bagpipes_spacy import EntitySimilarity
+
+# Integrate the component into the pipeline
 nlp.add_pipe('entity_similarity')
+```
+
+### Integrating the Entity Cluster
+
+Import the `EntityCluster` and integrate it into your spaCy pipeline:
+
+```python
+from bagpipes_spacy import EntityCluster
+
+# Integrate the component into the pipeline
 nlp.add_pipe('entity_cluster')
+```
+
+### Integrating the Sentence Cluster
+
+Import the `SentenceCluster` and integrate it into your spaCy pipeline:
+
+```python
+from bagpipes_spacy import SentenceCluster
+
+# Integrate the component into the pipeline
 nlp.add_pipe('sentence_cluster')
+```
+
+### Integrating the Token Cluster
+
+Import the `TokenCluster` and integrate it into your spaCy pipeline:
+
+```python
+from bagpipes_spacy import TokenCluster
+
+# Integrate the component into the pipeline
 nlp.add_pipe('token_cluster')
-nlp.add_pipe("keyword_extractor", last=True, config={"top_n": 10, "min_ngram": 1, "max_ngram": 3, "strict": True, "top_n_sent": 3})
+```
+
+### Integrating the Keyword Extractor
+
+Import the `KeywordExtractor` and integrate it into your spaCy pipeline:
+
+```python
+from bagpipes_spacy import KeywordExtractor
+
+# Integrate the component into the pipeline
+nlp.add_pipe('keyword_extractor', last=True, config={"top_n": 10, "min_ngram": 1, "max_ngram": 3, "strict": True, "top_n_sent": 3})
 ```

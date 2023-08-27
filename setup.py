@@ -2,12 +2,12 @@ from setuptools import setup, find_packages
 
 setup(
     name="bagpipes-spacy",
-    version="0.1.2",
-    description="A collection of spaCy components for rules-based detection.",
+    version="0.1.3",
+    description="A collection of spaCy components for rules-based detection and extraction.",
     long_description=open("README.md", "r", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
     author="WJB Mattingly",
-    url="https://github.com/wjbmattingly/keyword-spacy",  # replace with the actual URL of your repository
+    url="https://github.com/wjbmattingly/bagpipes-spacy",  # replace with the actual URL of your repository
     packages=find_packages(),
     install_requires=[
         "spacy>=3.0",
