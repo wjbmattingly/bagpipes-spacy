@@ -53,11 +53,45 @@ Import the `QuoteDetector` and integrate it into your spaCy pipeline:
 import spacy
 from bagpipes_spacy import QuoteDetector
 
-# Initialize your preferred spaCy model
-nlp = spacy.load('en_core_web_md')
+nlp = spacy.blank("en")
 
-# Integrate the component into the pipeline
-nlp.add_pipe('quote_detector')
+nlp.add_pipe("quote_detector")
+
+text = """
+"I... oh ... very well," said the Prime Minister weakly. "Yes, I'll see Fudge."
+He hurried back to his desk, straightening his tie as he went. He had barely resumed his seat, and arranged his face into what he hoped was a relaxed and unfazed expression, when bright green flames burst into life in the empty grate beneath his marble mantelpiece. He watched, trying not to betray a flicker of surprise or alarm, as a portly man appeared within the flames, spinning as fast as a top. Seconds later, he had climbed out onto a rather fine antique rug, brushing ash from the sleeves of his long pin-striped cloak, a lime-green bowler hat in his hand.
+"Ah... Prime Minister," said Cornelius Fudge, striding forward with his hand outstretched. "Good to see you again."
+The Prime Minister could not honestly return this compliment, so said nothing at all. He was not remotely pleased to see Fudge, whose occasional appearances, apart from being downright alarming in themselves, generally meant that he was about to hear some very bad news. Furthermore, Fudge was looking distinctly careworn. He was thinner, balder, and grayer, and his face had a crumpled look. The Prime Minister had seen that kind of look in politicians before, and it never boded well.
+"How can I help you?" he said, shaking Fudge's hand very briefly and gesturing toward the hardest of the chairs in front of the desk.
+"Difficult to know where to begin," muttered Fudge, pulling up the chair, sitting down, and placing his green bowler upon his knees. "What a week, what a week..."
+"Had a bad one too, have you?" asked the Prime Minister stiffly, hoping to convey by this that he had quite enough on his plate already without any extra helpings from Fudge.
+"Yes, of course," said Fudge, rubbing his eyes wearily and looking morosely at the Prime Minister. "I've been having the same week you have, Prime Minister. The Brockdale Bridge... the Bones and Vance murders... not to mention the ruckus in the West Country..."
+"You--er--your--I mean to say, some of your people were--were involved in those--those things, were they?"
+Fudge fixed the Prime Minister with a rather stern look. "Of course they were," he said, "Surely you've realized what's going on?"
+"I..." hesitated the Prime Minister.
+"""
+
+doc = nlp(text)
+for quote in doc._.quotes:
+    print(quote)
+```
+
+Output:
+```
+"I... oh ... very well,"
+"Yes, I'll see Fudge."
+"Ah... Prime Minister,"
+"Good to see you again."
+"How can I help you?"
+"Difficult to know where to begin,"
+"What a week, what a week..."
+"Had a bad one too, have you?"
+"Yes, of course,"
+"I've been having the same week you have, Prime Minister. The Brockdale Bridge... the Bones and Vance murders... not to mention the ruckus in the West Country..."
+"You--er--your--I mean to say, some of your people were--were involved in those--those things, were they?"
+"Of course they were,"
+"Surely you've realized what's going on?"
+"I..."
 ```
 
 ### Integrating the Phrases Extractor
@@ -68,7 +102,45 @@ Import the `PhrasesExtractor` and integrate it into your spaCy pipeline:
 from bagpipes_spacy import PhrasesExtractor
 
 # Integrate the component into the pipeline
-nlp.add_pipe('phrases_extractor')
+nlp = spacy.load("en_core_web_md")
+
+nlp.add_pipe("phrases_extractor")
+
+text = """Seconds later, he had climbed out onto a rather fine antique rug, brushing ash from the sleeves of his long pin-striped cloak, a lime-green bowler hat in his hand.
+"""
+
+doc = nlp(text)
+
+print("Prepositional Phrases")
+print(doc._.prep_phrases)
+print()
+
+print("Noun Phrases")
+print(doc._.noun_phrases)
+print()
+
+print("Verb Phrases")
+print(doc._.verb_phrases)
+print()
+
+print("Adj Phrases")
+print(doc._.adj_phrases)
+```
+
+Output:
+```
+Prepositional Phrases
+[out onto, onto a rather fine antique rug, from the sleeves, of his long pin-striped cloak, in his hand]
+
+Noun Phrases
+[a rather fine antique rug, the sleeves of his long pin-striped cloak, a lime-green bowler hat in his hand, his long pin-striped cloak, a lime-green bowler hat in his hand, a lime-green bowler hat in his hand, his hand]
+
+Verb Phrases
+[Seconds later, he had climbed out onto a rather fine antique rug, brushing ash from the sleeves of his long pin-striped cloak, a lime-green bowler hat in his hand.
+, brushing ash from the sleeves of his long pin-striped cloak, a lime-green bowler hat in his hand, pin-striped]
+
+Adj Phrases
+[fine antique, long, green]
 ```
 
 ### Integrating the Normalizer

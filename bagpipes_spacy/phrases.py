@@ -61,12 +61,20 @@ class PhrasesExtractor:
         for token in doc:
             # Prepositional Phrases
             if token.pos_ == 'ADP':
-                children = list(token.children)
-                prep_phrase = doc[token.i : children[-1].i + 1] if children else token
+                # Get the adjacent tokens
+                next_token = doc[token.i + 1] if token.i < len(doc) - 1 else None
+                # Check if the next token is also a preposition
+                if next_token and next_token.pos_ == 'ADP':
+                    prep_phrase = doc[token.i : next_token.i + 1]
+                else:
+                    children = list(token.children)
+                    prep_phrase = doc[token.i : children[-1].i + 1] if children else token
                 prep_phrases.append(prep_phrase)
+
             # Noun Phrases
             elif token.pos_ == 'NOUN':
                 noun_phrase = doc[token.left_edge.i : token.right_edge.i + 1]
+        
                 noun_phrases.append(noun_phrase)
             # Verb Phrases
             elif token.pos_ == 'VERB':
