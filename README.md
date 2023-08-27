@@ -29,7 +29,6 @@ Bagpipes spaCy is a collection of custom spaCy pipeline components designed to e
     - [Integrating the Normalizer](#integrating-the-normalizer)
     - [Integrating the Triple Detector](#integrating-the-triple-detector)
     - [Integrating the Entity Similarity](#integrating-the-entity-similarity)
-  - [Usage](#usage-1)
     - [Sentence Cluster](#sentence-cluster)
     - [Token Cluster](#token-cluster)
     - [Entity Cluster](#entity-cluster)
@@ -104,10 +103,6 @@ from bagpipes_spacy import EntitySimilarity
 # Integrate the component into the pipeline
 nlp.add_pipe('entity_similarity')
 ```
-
-Absolutely, here's how you can restructure your README to include individual usage examples for each component:
-
-## Usage
 
 ### Sentence Cluster
 
